@@ -34,7 +34,7 @@ This is FYI-style open source. I'm sharing it for interested parties, but withou
 
 ### Using it in GitHub Actions
 
-Add the following workflow to e.g. `github/workflows/note-link-janitor.yml`:
+Add the following workflow to e.g. `.github/workflows/note-link-janitor.yml`:
 
 ```yaml
 name: Note Link Janitor
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: ${{github.repository}}.wiki
-      - uses: sander/note-link-janitor@v3
+      - uses: sander/note-link-janitor@v5
 ```
 
 Then trigger the workflow by either editing a wiki page, or manually by using the **Run workflow** button in the GitHub Actions tab.
