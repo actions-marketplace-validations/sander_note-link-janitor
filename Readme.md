@@ -1,4 +1,6 @@
-# note-link-janitor
+# Note Link Janitor
+
+**This is a fork of [Andy Matuschak’s note-link-janitor](https://github.com/andymatuschak/note-link-janitor) with additional support for GitHub wiki.** The rest of this README mostly describes the original tool.
 
 This script reads in a folder of Markdown files, notes all the [[wiki-style links]] between them, then adds a special "backlinks" section which lists passages which reference a given file.
 
@@ -26,9 +28,34 @@ The backlinks section will be initially inserted at the end of the file. If ther
 
 ### This is FYI-style open source
 
-This is FYI-style open source. I'm sharing it for interested parties, but without any stewardship commitment. Assume that my default response to issues and pull requests will be to ignore or close them without comment. If you do something interesting with this, though, [please let me know](mailto:andy@andymatuschak.org).
+This is FYI-style open source. I'm sharing it for interested parties, but without any stewardship commitment. Assume that my default response to issues and pull requests will be to ignore or close them without comment. If you do something interesting with this, though, please let me know (see contact details in the [original repository](https://github.com/andymatuschak/note-link-janitor)).
 
 ## Usage
+
+### Using it in GitHub Actions
+
+Add the following workflow to e.g. `github/workflows/note-link-janitor.yml`:
+
+```yaml
+name: Note Link Janitor
+
+on:
+  gollum:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{github.repository}}.wiki
+      - uses: sander/note-link-janitor@v3
+```
+
+Then trigger the workflow by either editing a wiki page, or manually by using the **Run workflow** button in the GitHub Actions tab.
+
+### Running it locally
 
 To install a published release, run:
 

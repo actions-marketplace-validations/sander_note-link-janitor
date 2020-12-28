@@ -1,5 +1,7 @@
 name: Maintain backlinks in wiki
 description: Add or update a backlinks section to each wiki page.
+icon: skip-back
+color: purple
 runs:
   using: "composite"
   steps:
