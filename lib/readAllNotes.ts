@@ -54,6 +54,8 @@ async function readNote(notePath: string): Promise<Note> {
   return { title, links: getNoteLinks(parseTree), parseTree, noteContents };
 }
 
+const HIDDEN_FILE_REG_EXP = /^[._]/;
+
 export default async function readAllNotes(
   noteFolderPath: string
 ): Promise<{ [key: string]: Note }> {
@@ -61,7 +63,7 @@ export default async function readAllNotes(
     withFileTypes: true
   });
   const notePaths = noteDirectoryEntries
-    .filter(entry => entry.isFile() && !entry.name.startsWith(".") && entry.name.endsWith(".md"))
+    .filter(entry => entry.isFile() && !entry.name.match(HIDDEN_FILE_REG_EXP) && entry.name.endsWith(".md"))
     .map(entry => path.join(noteFolderPath, entry.name));
 
   const noteEntries = await Promise.all(
